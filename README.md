@@ -8,7 +8,8 @@ This is the API of the translation app that takes in English text and translates
 
 ## API Endpoint
 [https://sayitingerman.netlify.app/api/translate](https://sayitingermanapi.onrender.com/api/translate)
-Note that the API only accepts requests from the UI at [https://sayitingerman.netlify.app/](https://sayitingerman.netlify.app/). This is done by using CORS options.
+
+- Note that the API only accepts requests from the UI at [https://sayitingerman.netlify.app/](https://sayitingerman.netlify.app/). This is done by using CORS options.
 
 
 ## Technologies Used
