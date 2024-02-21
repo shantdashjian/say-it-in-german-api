@@ -8,7 +8,7 @@ const PORT = 3000;
 app.use(express.json());
 
 const corsOptions = {
-  origin: 'https://sayitingerman.netlify.app/',
+  origin: 'https://sayitingerman.netlify.app',
   optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
