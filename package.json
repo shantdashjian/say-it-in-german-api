@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "The API of the Say It in German app.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "nodemon index.js",
     "start": "node index.js",
@@ -29,6 +30,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2",
+    "firebase": "^10.8.0",
     "openai": "^4.28.0"
   }
 }
