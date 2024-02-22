@@ -22,7 +22,7 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-app.post('/api/translate/', async (req, res) => {
+app.post('/api/translation/', async (req, res) => {
   const englishText = req.body.englishText;
   const response = await openai.chat.completions.create({
     model: "gpt-3.5-turbo",
