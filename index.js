@@ -2,7 +2,7 @@ import express from 'express';
 import OpenAI from "openai";
 import cors from 'cors';
 import { initializeApp } from 'firebase/app'
-import {getDatabase, ref, onValue} from 'firebase/database'
+import {getDatabase, ref, onValue, push} from 'firebase/database'
 
 const databaseAppSettings = {
 	databaseURL: process.env.DATABASE_URL
@@ -10,13 +10,15 @@ const databaseAppSettings = {
 
 const databaeApp = initializeApp(databaseAppSettings)
 const database = getDatabase(databaeApp)
-let translations = ref(database, 'translations')
+let translationsInDB = ref(database, 'translations')
+let translations = []
 
-onValue(translations, (snapshot) => {
+onValue(translationsInDB, (snapshot) => {
 	if (snapshot.exists()) {
     translations = Object.entries(snapshot.val()).reverse();
   }
 })
+
 const app = express();
 const PORT = 3000;
 
@@ -53,6 +55,11 @@ app.post('/api/translation/', async (req, res) => {
     ],
   });
   const germanText = response.choices[0].message.content
+  push(translationsInDB, {
+		english: englishText,
+		german: germanText,
+		highlighted: false
+	})
   res.status(200).json({ germanText: germanText });
 });
 
