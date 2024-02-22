@@ -7,11 +7,16 @@ const PORT = 3000;
 
 app.use(express.json());
 
-const corsOptions = {
+const corsOptionsProduction = {
   origin: 'https://sayitingerman.netlify.app',
   optionsSuccessStatus: 200
 };
-app.use(cors(corsOptions));
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(cors(corsOptionsProduction));
+} else {
+  app.use(cors());
+}
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
