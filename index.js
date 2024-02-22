@@ -2,7 +2,7 @@ import express from 'express';
 import OpenAI from "openai";
 import cors from 'cors';
 import { initializeApp } from 'firebase/app'
-import {getDatabase, ref, onValue, push, update} from 'firebase/database'
+import {getDatabase, ref, onValue, push, update, remove} from 'firebase/database'
 
 const databaseAppSettings = {
 	databaseURL: process.env.DATABASE_URL
@@ -80,6 +80,13 @@ app.put('/api/translation/:id', async (req, res) => {
   const translationRef = ref(database,`translations/${id}`)
 	update(translationRef, {highlighted: req.body.highlighted})
   res.status(200).json({ translation: req.body })
+})
+
+app.delete('/api/translation/:id', async (req, res) => {
+  const id = req.params.id
+  const translationRef = ref(database,`translations/${id}`)
+	remove(translationRef)
+  res.status(200).send()
 })
 
 app.listen(PORT, () => {
