@@ -55,12 +55,14 @@ app.post('/api/translation/', async (req, res) => {
     ],
   });
   const germanText = response.choices[0].message.content
-  push(translationsInDB, {
+  const translation = {
 		english: englishText,
 		german: germanText,
 		highlighted: false
-	})
-  res.status(200).json({ germanText: germanText });
+	}
+  const ref = push(translationsInDB, translation)
+  translation.id = ref.key
+  res.status(200).json(translation);
 });
 
 app.get('/api/translation/', async (req, res) => {
